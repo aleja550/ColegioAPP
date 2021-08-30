@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Curso\Commands\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Application.Interfaces.UseCases\Application.Interfaces.UseCases.csproj" />
+    <ProjectReference Include="..\Domain.SeedWork\Domain.SeedWork.csproj" />
+  </ItemGroup>
+
+</Project>
