@@ -17,7 +17,7 @@ namespace Application.UseCases
         {
             bool existsEstudiante = _estudianteRepository.CheckEstudiante(estudiante.Identificacion);
 
-            if (!existsEstudiante)
+            if (existsEstudiante)
             {
                 throw new HandlerException(409,$"El estudiante con la identificacion {estudiante.Identificacion} ya ha sido creado.");
             }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Application.Interfaces.UseCases;
 using Domain.AggregatesModel;
 using Domain.SeedWork;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

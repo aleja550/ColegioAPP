@@ -1,0 +1,42 @@
+
+<div class="container">
+  <div class="row">
+      <div class="col-10">
+        <h1>Estudiantes</h1>
+      </div>
+      <div class="col-2">
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalCrear">
+          Agregar Estudiante
+        </button>
+      </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="card animated fadeIn fast" *ngFor="let estudiante of estudiantes" style="width: 18rem;">
+        <img class="card-img-top img-fluid" src="assets/img/batman.png" alt="{{estudiante.nombre1}}">
+        <div class="card-body">
+          <h5 class="card-title">{{estudiante.nombre1}} {{estudiante.apellido1}}</h5>
+          <p class="card-text">Correo: {{estudiante.email}}</p>
+          <p class="card-text"><small class="text-muted">Celular: {{ estudiante.celular }}</small></p>
+          <a href="#" (click)="verEstudiante()" class="btn btn-primary">Detalles</a>
+        </div>
+      </div>
+</div>  
+
+<!-- Modal -->
+<div class="modal fade" id="modalCrear" tabindex="-1" aria-labelledby="modalCrearlLabel" aFria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalCrearLabel">Crear Estudiante</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-modal-crear></app-modal-crear>
+      </div>   
+    </div>
+  </div>
+</div>

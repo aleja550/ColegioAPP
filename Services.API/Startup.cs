@@ -8,11 +8,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Services.API.Configuration;
+using System;
 
 namespace Services.API
 {
     public class Startup
     {
+        private readonly string _MyCors = "EnableCORS";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -32,6 +34,18 @@ namespace Services.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ColegioAPP API", Version = "v1" });
             });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: _MyCors, builder =>
+                {
+                    builder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost")
+                    .AllowAnyMethod()
+                  .AllowAnyHeader()
+                  .AllowCredentials()
+                  .Build();
+                });
+            });
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -44,25 +58,25 @@ namespace Services.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "ColegioAPP API");
+                });
             }
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseCors(_MyCors);
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-            });
-
-            app.UseSwagger();
-
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ColegioAPP API");
-            });
+            });            
         }
     }
 }

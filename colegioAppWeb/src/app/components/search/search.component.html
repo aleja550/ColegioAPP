@@ -1,0 +1,16 @@
+<h1>Estudiantes por búsqueda: '{{palabraClave}}'</h1>
+<hr>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+
+    <div class="card animated fadeIn fast" *ngFor="let estudiante of estudiantes" style="width: 18rem;">
+        <img class="card-img-top img-fluid" src="assets/img/batman.png" alt="{{estudiante.nombre1}}">
+        <div class="card-body">
+          <h5 class="card-title">{{estudiante.nombre1}} {{estudiante.apellido1}}</h5>
+          <p class="card-text">Correo: {{estudiante.email}}</p>
+          <p class="card-text"><small class="text-muted">Celular: {{ estudiante.celular }}</small></p>
+          <a href="#" (click)="verEstudiante()" class="btn btn-primary">Detalles</a>
+        </div>
+      </div>
+
+</div>  
