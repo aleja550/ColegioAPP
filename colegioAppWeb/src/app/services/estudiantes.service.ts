@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Estudiante } from '../models/estudiante';
 import { catchError, map } from 'rxjs/operators';
@@ -16,11 +16,12 @@ export class EstudiantesService {
         }));
     }
 
-    createEstudiante(estudiante: Estudiante): Observable<any | HttpResponse<any>> {
-        let res = this.http.post<any>('https://localhost:44320/Estudiante', estudiante, {observe: 'response'});
+    createEstudiante(estudiante: Estudiante): Observable<Estudiante> {
+        let res = this.http.post<Estudiante>('https://localhost:44320/Estudiante', estudiante, {observe: 'response'})
+        .pipe(catchError(error => throwError(`Ocurrio un error creando el estudiante. Error ${error.status}`)));;
 
-        return res.pipe(
-            catchError(error => throwError(`Ocurrio un error creando el estudiante. Error ${error.status}`)),
-        );
+        return res.pipe( map(data => {
+            return data.body;
+        }));
     }
 }

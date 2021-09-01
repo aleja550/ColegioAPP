@@ -14,7 +14,7 @@ namespace Infrastructure.EntityFramework
         public IEnumerable<Estudiante> GetAll() => _estudianteRepository.Get();
         public Estudiante GetById(int id) => _estudianteRepository.GetById(id);
 
-        public void Create(Estudiante estudiante) => _estudianteRepository.Add(estudiante);
+        public Estudiante Create(Estudiante estudiante) => _estudianteRepository.AddReturningEntity(estudiante);
         public void Update(Estudiante estudiante) => _estudianteRepository.Update(estudiante);
         public void Delete(int id) => _estudianteRepository.Delete(id);
 

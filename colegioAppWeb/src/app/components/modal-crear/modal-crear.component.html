@@ -3,11 +3,15 @@
       <button class="nav-link active" id="datos-tab" data-bs-toggle="tab" data-bs-target="#datos" type="button" role="tab" aria-controls="datos" aria-selected="true">Datos Estudiante</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Adicionar Cursos</button>
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+       role="tab" aria-controls="profile" aria-selected="false" [disabled]="estadoGestion">Gestión Cursos</button>
     </li>
   </ul>
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="datos" role="tabpanel" aria-labelledby="datos-tab">
+
+      <h1>{{estadoGestion === true ? 'Crear Estudiante' : 'Actualizar Estudiante'}}</h1>
+      <hr>
 
       <div class="container">
         <div class="jumbotron">
@@ -19,56 +23,46 @@
                 <option>CC</option>
                 <option>TI</option>
               </select>
-              <div class="valid-feedback">Se ve bien</div>
               <div class="invalid-feedback">Por favor llene este campo</div>
             </div>
             <div class="col-md-4">
               <label>Número Identificación:</label>
               <input type="text" class="form-control" [(ngModel)]="numeroId" name="numeroId" maxlength="20" required>
-              <div class="valid-feedback">Se ve bien</div>
               <div class="invalid-feedback">Por favor llene este campo</div>
             </div>
             <div class="col-md-4">
               <label>Primer Nombre:</label>
               <input type="text" class="form-control" [(ngModel)]="nombre1" name="nombre1" required>
-              <div class="valid-feedback">Se ve bien</div>
               <div class="invalid-feedback">Por favor llene este campo</div>
             </div>
             <div class="col-md-4">
               <label>Segundo Nombre:</label>
               <input type="text" class="form-control" [(ngModel)]="nombre2"name="nombre2" >
-              <div class="valid-feedback">Se ve bien</div>
             </div>
             <div class="col-md-4">
               <label>Primer Apellido:</label>
               <input type="text" class="form-control" [(ngModel)]="apellido1" name="apellido1" required>
-              <div class="valid-feedback">Se ve bien</div>
               <div class="invalid-feedback">Por favor llene este campo</div>
             </div>
             <div class="col-md-4">
               <label>Segundo Apellido:</label>
               <input type="text" class="form-control" [(ngModel)]="apellido2" name="apellido2" >
-              <div class="valid-feedback">Se ve bien</div>
             </div>
             <div class="col-md-4">
               <label>Correo:</label>
               <input type="email" class="form-control" [(ngModel)]="email" name="email" >
-              <div class="valid-feedback">Se ve bien</div>
             </div>
             <div class="col-md-4">
               <label>Celular:</label>
               <input type="text" class="form-control" [(ngModel)]="celular" name="celular" >
-              <div class="valid-feedback">Se ve bien</div>
             </div>
             <div class="col-md-4">
               <label>Dirección:</label>
               <input type="text" class="form-control"[(ngModel)]="direccion" name="direccion" >
-              <div class="valid-feedback">Se ve bien</div>
             </div>
             <div class="col-md-4">
               <label>Ciudad:</label>
               <input type="text" class="form-control" [(ngModel)]="ciudad" name="ciudad" required>
-              <div class="valid-feedback">Se ve bien</div>
               <div class="invalid-feedback">Por favor llene este campo</div>
             </div>
             
@@ -80,13 +74,27 @@
     </div>
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" (click)="getCursos()">
 
-      <select class="form-select" name="cursos">
-        <option value="">Selecione..</option>
-        <option *ngFor="let curso of cursos" value="curso.id">      
-            {{ curso.nombre }}
-        </option>
-      </select>
+      <h1>Gestión de cursos</h1>
+      <hr>
 
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <select class="form-select" name="cursos" (change)="selectCursos($event)">
+              <option value="">Selecione..</option>
+              <option *ngFor="let curso of cursos" [value]="curso.id">      
+                  {{ curso.nombre }}
+              </option>
+            </select>
+          </div>  
+          <div class="col-md-4">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalCrear" (click)="asociarCurso()">
+              Asignar Curso
+            </button>
+          </div>           
+        </div>      
+      </div>
+      
     </div>
   </div>
   

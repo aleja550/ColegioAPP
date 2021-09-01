@@ -28,7 +28,7 @@ export class SearchComponent implements OnInit {
   }
 
   filterEstudiantes( termino:string, estudiantesArr:Estudiante[]) {
-
+    this.estudiantes = [];
     termino = termino.toLowerCase();
     this.palabraClave = termino;
     

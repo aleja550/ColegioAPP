@@ -6,7 +6,7 @@ namespace Domain.AggregatesModel
     {
         IEnumerable<Estudiante> GetAll();
         Estudiante GetById(int id);
-        void Create(Estudiante estudiante);
+        Estudiante Create(Estudiante estudiante);
         void Update(Estudiante estudiante);
         void Delete(int id);
         bool CheckEstudiante(string documentNumber);

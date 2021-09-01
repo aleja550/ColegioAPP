@@ -83,9 +83,9 @@ namespace Services.API.Controllers
             }
             try
             {
-                _estudianteCommand.Create(estudiante);
+                Estudiante estudianteCreated = _estudianteCommand.Create(estudiante);
 
-                return StatusCode(StatusCodes.Status201Created);
+                return Ok(estudianteCreated);
             }
             catch (HandlerException ex)
             {

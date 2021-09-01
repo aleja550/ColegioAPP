@@ -13,7 +13,7 @@ namespace Application.UseCases
             _estudianteRepository = estudianteRepository;
         }
 
-        public void Create(Estudiante estudiante)
+        public Estudiante Create(Estudiante estudiante)
         {
             bool existsEstudiante = _estudianteRepository.CheckEstudiante(estudiante.Identificacion);
 
@@ -22,7 +22,9 @@ namespace Application.UseCases
                 throw new HandlerException(409,$"El estudiante con la identificacion {estudiante.Identificacion} ya ha sido creado.");
             }
 
-            _estudianteRepository.Create(estudiante);
+            Estudiante estudianteCreated = _estudianteRepository.Create(estudiante);
+
+            return estudianteCreated;
         }
         public void Delete(int id) => _estudianteRepository.Delete(id);
         public void Update(Estudiante estudiante) => _estudianteRepository.Update(estudiante);

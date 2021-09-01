@@ -18,6 +18,7 @@ import {APP_ROUTING} from './app.routes';
 //Servicios
 import { EstudiantesService } from './services/estudiantes.service';
 import { CursosService } from 'src/app/services/cursos.service';
+import { EstudianteCursosService } from 'src/app/services/estudiantesCursos.service';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { CursosService } from 'src/app/services/cursos.service';
   ],
   providers: [
     EstudiantesService,
-    CursosService
+    CursosService,
+    EstudianteCursosService
   ],
   bootstrap: [AppComponent]
 })
