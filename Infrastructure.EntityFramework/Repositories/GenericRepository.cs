@@ -80,7 +80,7 @@ namespace Infrastructure.EntityFramework
 
         public void AddRange(IEnumerable<TEntity> entities) => _context.Set<TEntity>().Iterate(e => Add(e));
 
-        public void Delete(object id)
+        public void Delete(int id)
         {
             TEntity getEntity = GetById(id);
 
@@ -97,6 +97,8 @@ namespace Infrastructure.EntityFramework
             }
 
             _context.Set<TEntity>().Remove(entity);
+
+            _context.SaveChanges();
         }
 
         public void DeleteRange(IEnumerable<TEntity> entities) => entities.Iterate(e => Delete(e));

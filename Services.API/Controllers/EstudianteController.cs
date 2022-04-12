@@ -123,5 +123,30 @@ namespace Services.API.Controllers
                 return new ObjectResult(new { Error = $"{DateTime.Now.Ticks} - Unhandled exception: {ex.StackTrace}, {ex.Message}, {ex.InnerException}" }) { StatusCode = 500 };
             }
         }
+
+        [HttpDelete("Eliminar/{id}")]
+        public ActionResult Delete(int id)
+        {
+            if (id == 0)
+            {
+                throw new HandlerException(400, "Es necesario obtener el id del estudiante");
+            }
+            try
+            {
+                _estudianteCommand.Delete(id);
+
+                return StatusCode(StatusCodes.Status200OK);
+            }
+            catch (HandlerException ex)
+            {
+                _logger.LogError($"{DateTime.Now.Ticks} -  {ex.MessageException}", ex, GetType().Name);
+                return new ObjectResult(new { Error = $"{ex.MessageException} - {DateTime.Now.Ticks} " }) { StatusCode = ex.StatusCode };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"{DateTime.Now.Ticks} - Unhandled exception: ", ex, GetType().Name);
+                return new ObjectResult(new { Error = $"{DateTime.Now.Ticks} - Unhandled exception: {ex.StackTrace}, {ex.Message}, {ex.InnerException}" }) { StatusCode = 500 };
+            }
+        }
     }
 }

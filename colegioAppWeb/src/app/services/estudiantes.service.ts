@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Estudiante } from '../models/estudiante';
 import { catchError, map } from 'rxjs/operators';
@@ -23,5 +23,11 @@ export class EstudiantesService {
         return res.pipe( map(data => {
             return data.body;
         }));
+    }
+
+    eliminarEstudiante(id: number) {
+       let res = this.http.delete(`https://localhost:44320/Estudiante/Eliminar/${id}`);
+
+       return res;
     }
 }

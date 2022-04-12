@@ -22,7 +22,7 @@ namespace Infrastructure.EntityFramework
         IEnumerable<TEntity> FindByIncluding(Expression<Func<TEntity, bool>> predicate, string includePropertiesString,
             params Expression<Func<TEntity, object>>[] includeProperties);
         void Delete(TEntity entity);
-        void Delete(object id);
+        void Delete(int id);
         void DeleteRange(IEnumerable<TEntity> entities);
         void Refresh(TEntity entity);
     }
